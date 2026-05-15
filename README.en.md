@@ -17,6 +17,38 @@ It ships with two visual systems:
 
 ![Style B Swiss International preview](https://github.com/user-attachments/assets/8960e78c-69bb-4b7e-aa95-6fad64b70314)
 
+## 30-second start
+
+```bash
+npx skills add https://github.com/op7418/guizang-ppt-skill --skill guizang-ppt-skill
+```
+
+Or paste this to an AI agent with shell access:
+
+```text
+Install guizang-ppt-skill for me. Clone https://github.com/op7418/guizang-ppt-skill into ~/.claude/skills/guizang-ppt-skill, then verify that SKILL.md, assets/, and references/ exist.
+```
+
+If you already installed it, update with:
+
+```text
+Update guizang-ppt-skill for me. Go to ~/.claude/skills/guizang-ppt-skill, run git pull, then tell me the latest commit.
+```
+
+Then ask your agent:
+
+```text
+Create a Swiss-style deck from this article, around 7 slides, with 2-3 generated visuals.
+```
+
+Other useful prompts:
+
+```text
+Turn this Markdown file into an editorial magazine-style presentation.
+Create a 21:9 social cover from the core idea of this deck.
+Redesign this product screenshot as a 16:10 slide visual.
+```
+
 ## What you get
 
 - 🖋 **Two visual systems**: editorial storytelling for Style A, factual Swiss structure for Style B
@@ -34,6 +66,35 @@ It ships with two visual systems:
 **✅ Fits**: offline talks, industry keynotes, private salons, AI product launches, demo day, presentations with strong personal voice
 
 **❌ Doesn't fit**: data-heavy tables, training decks (density too low), multi-user collaborative editing (static HTML)
+
+## Common use cases
+
+| Task | Recommended flow |
+|------|------------------|
+| Long article to talk deck | Extract the core argument, then build a 6-10 slide rhythm |
+| Framework / product analysis | Use Style B Swiss with locked layouts and 21:9 hero visuals |
+| Personal talk / opinion piece | Use Style A editorial magazine for stronger narrative rhythm |
+| Deck visuals | In Codex, generate photos, infographics, flow diagrams, system maps, or UI scenes |
+| Social covers | Generate 21:9 main covers, 1:1 share cards, 3:4 vertical covers, and video thumbnails from the same idea |
+| Screenshot normalization | Redesign raw screenshots into template-safe ratios before inserting them into slides |
+
+## Why HTML decks
+
+- **Agent-native editing**: HTML / CSS is plain text, so agents can read, edit, and validate it directly.
+- **Higher visual density than Markdown**: precise layout, positioning, motion, interactivity, and cover formats.
+- **Lightweight delivery**: one HTML file can be opened, presented, sent, screenshotted, or recorded.
+- **Better quality gates**: the Swiss validator can catch layout drift, unsafe image placement, centered body titles, and SVG text traps.
+- **One visual system across outputs**: decks, generated visuals, covers, and screenshot redesigns can share the same style rules.
+
+## Platform support
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Claude Code | Supported | Native Skill workflow for creating and iterating HTML decks |
+| Codex | Supported | Good for deck generation, image generation, and browser-based visual QA |
+| Cursor / other local agents | Works | Requires filesystem access and shell execution |
+| WorkBuddy | In adaptation | Marketplace-ready version is being prepared separately |
+| Plain chatbot | Not recommended | Without filesystem and browser preview, full deck generation is hard to stabilize |
 
 ## Install
 
@@ -134,6 +195,26 @@ The skill can also turn an article or deck idea into platform covers:
 
 The same rule applies: use a few strong keywords, keep the title as the visual center, and do not fill the canvas with body copy.
 
+## Example prompts
+
+Copy any of these prompts into your agent, then attach your article, Markdown file, or image assets:
+
+```text
+Create an 8-slide Swiss-style deck from this article, with 3 generated visuals matched to the template image slots.
+```
+
+```text
+Turn this product analysis document into an editorial magazine-style deck with a strong narrative rhythm.
+```
+
+```text
+From this deck's core idea, create two covers: a 21:9 main cover and a visually paired 1:1 share card.
+```
+
+```text
+Redesign these product screenshots into consistent 16:10 slide visuals. Preserve key UI information; do not add slide titles or footers inside the images.
+```
+
 ## Directory
 
 ```
@@ -201,6 +282,32 @@ If the user asks for a Swiss-style deck without specifying color, default to Int
 - YC Garry Tan — "Thin Harness, Fat Skills"
 - Massimo Vignelli / Helvetica Forever / Swiss International Typographic Style
 - Guizang's offline talk deck series
+
+## Roadmap
+
+- Add more real-world examples and openable HTML deck demos
+- Expand cover formats for more publishing platforms
+- Add more Swiss layout validation rules
+- Improve screenshot redesign and infographic generation workflows
+- Prepare marketplace-specific variants such as WorkBuddy
+- Add more curated theme packs while keeping custom colors restricted
+
+## FAQ
+
+**Can it export to PPTX?**
+The main output is HTML. You can present it in a browser, screenshot it, or record it. PPTX conversion can be done as a separate workflow, but it is not the core path today.
+
+**Why are custom colors not allowed?**
+The skill is designed for stable visual output. Arbitrary colors often break the system, so decks must use curated presets.
+
+**Can I add my own layout?**
+Yes. Style A layouts can be extended in `references/layouts.md`. Style B is stricter: update `template-swiss.html`, `layouts-swiss.md`, `swiss-layout-lock.md`, and the validator together.
+
+**Is Codex image generation required?**
+No. Decks work without generated images. The image flow is only used when you need photos, infographics, UI scenes, or covers.
+
+**How do I update the skill?**
+Run the install command again, or run `git pull` inside your local skill directory.
 
 ## Contributing
 

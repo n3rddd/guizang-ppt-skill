@@ -19,6 +19,38 @@
 
 ![Style B 瑞士国际主义效果展示](https://github.com/user-attachments/assets/8960e78c-69bb-4b7e-aa95-6fad64b70314)
 
+## 30 秒开始
+
+```bash
+npx skills add https://github.com/op7418/guizang-ppt-skill --skill guizang-ppt-skill
+```
+
+也可以直接把这段话发给有 shell 权限的 AI Agent:
+
+```text
+帮我安装 guizang-ppt-skill。请把 https://github.com/op7418/guizang-ppt-skill 克隆到 ~/.claude/skills/guizang-ppt-skill,安装完成后检查 SKILL.md、assets/、references/ 是否存在。
+```
+
+已经安装过的话,用这段话更新:
+
+```text
+帮我更新 guizang-ppt-skill。请进入 ~/.claude/skills/guizang-ppt-skill 执行 git pull,然后告诉我当前最新 commit。
+```
+
+安装后直接对 Agent 说:
+
+```text
+帮我基于这篇文章做一份瑞士风 PPT,控制在 7 页左右,需要 2-3 张配图。
+```
+
+也可以试这些请求:
+
+```text
+帮我把这份 Markdown 做成杂志风演讲 PPT。
+基于这份 PPT 的核心观点,生成一张公众号 21:9 头图。
+把这张产品截图重新设计成适合 PPT 的 16:10 配图。
+```
+
 ## 效果
 
 - 🖋 **双视觉系统**:电子杂志风负责叙事,瑞士风负责事实表达
@@ -36,6 +68,35 @@
 **✅ 合适**:线下分享 / 行业内部讲话 / 私享会 / AI 产品发布 / demo day / 带强烈个人风格的演讲
 
 **❌ 不合适**:大段表格数据 / 培训课件(信息密度不够)/ 需要多人协作编辑(静态 HTML)
+
+## 常见使用场景
+
+| 任务 | 推荐方式 |
+|------|---------|
+| 长文章变演讲 PPT | 先抽核心观点,再按 6-10 页节奏生成 deck |
+| 方法论 / 产品分析 | 用 Style B 瑞士风,优先使用锁定版式和 21:9 主图 |
+| 个人分享 / 观点表达 | 用 Style A 电子杂志风,保留更强叙事感 |
+| PPT 配图 | 在 Codex 中用 GPT-Image 2.0 / GPT-M 2.0 生成照片、信息图、流程图、UI 情景图 |
+| 多平台封面 | 从同一份内容生成公众号 21:9、1:1 分享卡、小红书 3:4、视频号横版封面 |
+| 截图统一风格 | 把原始截图重新生成到模板需要的比例,再插入 PPT |
+
+## 为什么是 HTML PPT
+
+- **更适合 Agent 生成和修改**:HTML / CSS 是文本,Agent 能直接读、改、验证。
+- **表现力比 Markdown 更高**:可以做精细排版、空间定位、动画、交互和响应式封面。
+- **交付更轻**:单文件 HTML 可以直接打开、演示、发送、截图。
+- **更容易做质量控制**:瑞士风可以用脚本校验版式、图片槽位、标题对齐和危险 SVG。
+- **更适合视觉内容链路**:同一套主题能覆盖 PPT、配图、封面和截图再设计。
+
+## 平台支持
+
+| 平台 | 状态 | 说明 |
+|------|------|------|
+| Claude Code | 支持 | 原生 Skill 工作流,适合生成和迭代 HTML deck |
+| Codex | 支持 | 适合生成 PPT、调用图片生成能力、做浏览器视觉检查 |
+| Cursor / 其他本地 Agent | 可用 | 需要能读写文件并执行 shell 命令 |
+| WorkBuddy | 适配中 | 单独整理上架版本,去掉平台不需要的渠道差异 |
+| 普通 Chatbot | 不推荐 | 没有文件系统和浏览器预览时,很难稳定生成完整 deck |
 
 ## 安装
 
@@ -136,6 +197,26 @@ node scripts/validate-swiss-deck.mjs path/to/index.html
 
 封面原则和 PPT 一样:只用少量关键词,视觉重心落在大标题上,不要把正文堆满。
 
+## 示例请求
+
+复制下面任意一条给 Agent,再附上你的文章、Markdown 或素材文件:
+
+```text
+帮我基于这篇文章生成一份 8 页左右的瑞士风 PPT,需要 3 张配图,图片比例跟模板槽位匹配。
+```
+
+```text
+帮我把这个产品分析文档做成电子杂志风 PPT,重点突出观点和叙事节奏。
+```
+
+```text
+基于这份 PPT 的主题,做两张封面:公众号 21:9 头图和 1:1 分享卡,视觉保持一致。
+```
+
+```text
+把这些产品截图重新设计成统一的 16:10 PPT 配图,保留关键信息,不要画页脚和标题。
+```
+
 ## 目录结构
 
 ```
@@ -202,6 +283,32 @@ guizang-ppt-skill/
 - YC Garry Tan "Thin Harness, Fat Skills"
 - Massimo Vignelli / Helvetica Forever / 瑞士国际主义网格系统
 - 歸藏线下分享 PPT 系列
+
+## Roadmap
+
+- 补充更多真实案例和可打开的 HTML deck 示例
+- 扩展封面规格,覆盖更多内容平台
+- 增加更多瑞士风版式校验规则
+- 优化截图再设计和信息图生成工作流
+- 整理 WorkBuddy 等平台上架版本
+- 增加更多主题包,但继续限制自定义颜色
+
+## FAQ
+
+**可以导出 PPTX 吗?**
+当前核心交付是 HTML。你可以用浏览器演示、截图或录屏。如果需要 PPTX,建议把 HTML 页面作为视觉稿再转换,但这不是当前主流程。
+
+**为什么不允许自定义颜色?**
+这个 Skill 的重点是稳定产出。自由选色很容易破坏整体风格,所以只允许从预设主题里选。
+
+**我能加自己的版式吗?**
+可以。Style A 可以在 `references/layouts.md` 里扩展；Style B 更严格,需要同步更新 `template-swiss.html`、`layouts-swiss.md`、`swiss-layout-lock.md` 和校验器。
+
+**Codex 配图是必须的吗?**
+不是。没有配图也能生成 PPT。配图流程只在需要照片、信息图、UI 情景图或封面时使用。
+
+**怎么更新到最新版?**
+重新运行安装命令,或在本地 skill 目录执行 `git pull`。
 
 ## 贡献
 
